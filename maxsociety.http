@@ -1,0 +1,6 @@
+@maxsociety_HostAddress = http://localhost:5224
+
+GET {{maxsociety_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
