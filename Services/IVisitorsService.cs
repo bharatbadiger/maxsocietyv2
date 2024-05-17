@@ -9,6 +9,7 @@ namespace Maxsociety.Services
         Task<Visitors> AddVisitorAsync(Visitors visitor);
         Task UpdateVisitorAsync(long id, Visitors visitor);
         Task DeleteVisitorAsync(long id);
+        Task<Visitors> GetVisitorByMobileNoAsync(string mobileNo);
     }
 }
 

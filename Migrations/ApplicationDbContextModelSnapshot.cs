@@ -30,8 +30,24 @@ namespace maxsociety.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VisitorLogId"));
 
-                    b.Property<DateTime>("VisitDateTime")
+                    b.Property<string>("Block")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FlatNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResidentName")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("VisitPurpose")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VisitStatus")
                         .HasColumnType("int");
@@ -76,15 +92,8 @@ namespace maxsociety.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<string>("ResidentName")
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("VisitPurpose")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VisitorName")
                         .IsRequired()

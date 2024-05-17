@@ -1,93 +1,117 @@
+using Maxsociety;
 using Maxsociety.Models;
 using Maxsociety.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [Route("maxsociety/[controller]")]
 [ApiController]
 public class VisitorLogsController : ControllerBase
 {
     private readonly IVisitorLogsService _visitorLogsService;
+    private readonly IVisitorsService _visitorsService;
 
-    public VisitorLogsController(IVisitorLogsService visitorLogsService)
+    public VisitorLogsController(IVisitorLogsService visitorLogsService, IVisitorsService visitorsService)
     {
         _visitorLogsService = visitorLogsService;
+        _visitorsService = visitorsService;
     }
 
-    // GET: api/VisitorLogs
+    // GET: maxsociety/VisitorLogs
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<VisitorLogs>>> GetVisitorLogs()
+    public async Task<ActionResult<ApiResponse<IEnumerable<VisitorLogs>>>> GetVisitorLogs()
     {
         var visitorLogs = await _visitorLogsService.GetVisitorLogsAsync();
-        return Ok(visitorLogs);
+        return Ok(new ApiResponse<IEnumerable<VisitorLogs>>(true, "Fetched visitor logs successfully", visitorLogs));
     }
 
-    // GET: api/VisitorLogs/5
+    // GET: maxsociety/VisitorLogs/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<VisitorLogs>> GetVisitorLog(long id)
+    public async Task<ActionResult<ApiResponse<VisitorLogs>>> GetVisitorLog(long id)
     {
         var visitorLog = await _visitorLogsService.GetVisitorLogByIdAsync(id);
 
         if (visitorLog == null)
         {
-            return NotFound();
+            return NotFound(new ApiResponse<VisitorLogs>(false, "Visitor log not found", null));
         }
 
-        return Ok(visitorLog);
+        return Ok(new ApiResponse<VisitorLogs>(true, "Fetched visitor log successfully", visitorLog));
     }
 
-    // POST: api/VisitorLogs
+    // GET: maxsociety/VisitorLogs/mobileNo/{mobileNo}
+    [HttpGet("mobileNo/{mobileNo}")]
+    public async Task<ActionResult<ApiResponse<IEnumerable<VisitorLogs>>>> GetVisitorLogsByMobileNo(string mobileNo)
+    {
+        var visitor = await _visitorsService.GetVisitorByMobileNoAsync(mobileNo);
+
+        if (visitor == null)
+        {
+            return NotFound(new ApiResponse<IEnumerable<VisitorLogs>>(false, "Visitor not found", null));
+        }
+
+        var visitorLogs = await _visitorLogsService.GetVisitorLogsByVisitorIdAsync(visitor.VisitorId);
+        return Ok(new ApiResponse<IEnumerable<VisitorLogs>>(true, "Fetched visitor logs successfully", visitorLogs));
+    }
+
+    // GET: maxsociety/VisitorLogs/visitor/{visitorId}
+    [HttpGet("visitor/{visitorId}")]
+    public async Task<ActionResult<ApiResponse<IEnumerable<VisitorLogs>>>> GetVisitorLogsByVisitorId(long visitorId)
+    {
+        var visitorLogs = await _visitorLogsService.GetVisitorLogsByVisitorIdAsync(visitorId);
+        return Ok(new ApiResponse<IEnumerable<VisitorLogs>>(true, "Fetched visitor logs successfully", visitorLogs));
+    }
+
+    // POST: maxsociety/VisitorLogs
     [HttpPost]
-    public async Task<ActionResult<VisitorLogs>> PostVisitorLog(VisitorLogs visitorLog)
+    public async Task<ActionResult<ApiResponse<VisitorLogs>>> PostVisitorLog(VisitorLogs visitorLog)
     {
         try
         {
             var addedVisitorLog = await _visitorLogsService.AddVisitorLogAsync(visitorLog);
-            return CreatedAtAction(nameof(GetVisitorLog), new { id = addedVisitorLog.VisitorLogId }, addedVisitorLog);
+            return CreatedAtAction(nameof(GetVisitorLog), new { id = addedVisitorLog.VisitorLogId }, new ApiResponse<VisitorLogs>(true, "Visitor log added successfully", addedVisitorLog));
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new ApiResponse<VisitorLogs>(false, ex.Message, null));
         }
     }
 
-    // PUT: api/VisitorLogs/5
+    // PUT: maxsociety/VisitorLogs/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutVisitorLog(long id, VisitorLogs visitorLog)
+    public async Task<ActionResult<ApiResponse<VisitorLogs>>> PutVisitorLog(long id, VisitorLogs visitorLog)
     {
         if (id != visitorLog.VisitorLogId)
         {
-            return BadRequest("Id mismatch");
+            return BadRequest(new ApiResponse<VisitorLogs>(false, "Id mismatch", null));
         }
 
         try
         {
             await _visitorLogsService.UpdateVisitorLogAsync(id, visitorLog);
-            return NoContent();
+            return Ok(new ApiResponse<VisitorLogs>(true, "Visitor log updated successfully", visitorLog));
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new ApiResponse<VisitorLogs>(false, ex.Message, null));
         }
     }
 
-    // DELETE: api/VisitorLogs/5
+    // DELETE: maxsociety/VisitorLogs/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteVisitorLog(long id)
+    public async Task<ActionResult<ApiResponse<VisitorLogs>>> DeleteVisitorLog(long id)
     {
         try
         {
             await _visitorLogsService.DeleteVisitorLogAsync(id);
-            return NoContent();
+            return Ok(new ApiResponse<VisitorLogs>(true, "Visitor log deleted successfully", null));
         }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(ex.Message);
+            return NotFound(new ApiResponse<VisitorLogs>(false, ex.Message, null));
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new ApiResponse<VisitorLogs>(false, ex.Message, null));
         }
     }
 }

@@ -52,6 +52,11 @@ public class VisitorsService : IVisitorsService
         _context.Visitors.Remove(visitor);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Visitors> GetVisitorByMobileNoAsync(string mobileNo)
+    {
+        return await _context.Visitors.FirstOrDefaultAsync(v => v.MobileNo == mobileNo);
+    }
 }
 
 

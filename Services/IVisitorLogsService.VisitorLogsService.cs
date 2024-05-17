@@ -24,6 +24,11 @@ namespace Maxsociety.Services
             .FirstOrDefaultAsync(vl => vl.VisitorLogId == id);
         }
 
+        public async Task<IEnumerable<VisitorLogs>> GetVisitorLogsByVisitorIdAsync(long visitorId)
+        {
+            return await _context.VisitorLogs.Where(vl => vl.VisitorId == visitorId).Include(vl => vl.Visitor).ToListAsync();
+        }
+
         public async Task<VisitorLogs> AddVisitorLogAsync(VisitorLogs visitorLog)
         {
             _context.VisitorLogs.Add(visitorLog);

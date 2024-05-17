@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace maxsociety.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,9 +24,7 @@ namespace maxsociety.Migrations
                     FlatNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ResidentName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
-                    VisitPurpose = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,8 +38,13 @@ namespace maxsociety.Migrations
                     VisitorLogId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VisitorId = table.Column<long>(type: "bigint", nullable: true),
-                    VisitDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VisitStatus = table.Column<int>(type: "int", nullable: false)
+                    Block = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FlatNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VisitPurpose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResidentName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    VisitStatus = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

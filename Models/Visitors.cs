@@ -4,7 +4,7 @@ using Maxsociety.Enums;
 
 namespace Maxsociety.Models
 {
-    public class Visitors
+    public class Visitors : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -29,13 +29,5 @@ namespace Maxsociety.Models
 
         public string? ImagePath { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime UpdatedOn { get; set; }
-
-        [MaxLength(60)]
-        public string? ResidentName { get; set; }
-
-        public string? VisitPurpose { get; set; }
     }
 }

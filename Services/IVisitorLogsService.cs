@@ -11,5 +11,6 @@ namespace Maxsociety.Services
         Task<VisitorLogs> AddVisitorLogAsync(VisitorLogs visitorLog);
         Task UpdateVisitorLogAsync(long id, VisitorLogs visitorLog);
         Task DeleteVisitorLogAsync(long id);
+        Task<IEnumerable<VisitorLogs>> GetVisitorLogsByVisitorIdAsync(long visitorId);
     }
 }
