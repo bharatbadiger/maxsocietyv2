@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("maxsociety")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c77bb4ed96e32187f807e70c2a120e64373b301e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62d18ddf47d39c5beb487ac0f09359d9fdbafcdf")]
 [assembly: System.Reflection.AssemblyProductAttribute("maxsociety")]
 [assembly: System.Reflection.AssemblyTitleAttribute("maxsociety")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

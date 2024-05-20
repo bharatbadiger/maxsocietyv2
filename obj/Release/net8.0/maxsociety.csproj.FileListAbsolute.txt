@@ -134,3 +134,4 @@
 /Users/bharatbadiger/maxsociety/obj/Release/net8.0/maxsociety.pdb
 /Users/bharatbadiger/maxsociety/obj/Release/net8.0/maxsociety.genruntimeconfig.cache
 /Users/bharatbadiger/maxsociety/obj/Release/net8.0/ref/maxsociety.dll
+/Users/bharatbadiger/maxsociety/obj/Release/net8.0/maxsociety.sourcelink.json

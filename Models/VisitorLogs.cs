@@ -8,7 +8,7 @@ namespace Maxsociety.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long VisitorLogId { get; set; }
+        public long Id { get; set; }
 
         [ForeignKey("Visitor")]
         public long? VisitorId { get; set; }
@@ -18,6 +18,8 @@ namespace Maxsociety.Models
         public string? Block { get; set; }
 
         public string? FlatNo { get; set; }
+
+        public string? Type { get; set; }
 
         public string? VisitPurpose { get; set; }
 

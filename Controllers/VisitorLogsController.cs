@@ -49,7 +49,7 @@ public class VisitorLogsController : ControllerBase
             return NotFound(new ApiResponse<IEnumerable<VisitorLogs>>(false, "Visitor not found", null));
         }
 
-        var visitorLogs = await _visitorLogsService.GetVisitorLogsByVisitorIdAsync(visitor.VisitorId);
+        var visitorLogs = await _visitorLogsService.GetVisitorLogsByVisitorIdAsync(visitor.Id);
         return Ok(new ApiResponse<IEnumerable<VisitorLogs>>(true, "Fetched visitor logs successfully", visitorLogs));
     }
 
@@ -68,7 +68,7 @@ public class VisitorLogsController : ControllerBase
         try
         {
             var addedVisitorLog = await _visitorLogsService.AddVisitorLogAsync(visitorLog);
-            return CreatedAtAction(nameof(GetVisitorLog), new { id = addedVisitorLog.VisitorLogId }, new ApiResponse<VisitorLogs>(true, "Visitor log added successfully", addedVisitorLog));
+            return CreatedAtAction(nameof(GetVisitorLog), new { id = addedVisitorLog.Id }, new ApiResponse<VisitorLogs>(true, "Visitor log added successfully", addedVisitorLog));
         }
         catch (Exception ex)
         {
@@ -80,7 +80,7 @@ public class VisitorLogsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<VisitorLogs>>> PutVisitorLog(long id, VisitorLogs visitorLog)
     {
-        if (id != visitorLog.VisitorLogId)
+        if (id != visitorLog.Id)
         {
             return BadRequest(new ApiResponse<VisitorLogs>(false, "Id mismatch", null));
         }

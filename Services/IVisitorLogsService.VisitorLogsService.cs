@@ -21,7 +21,7 @@ namespace Maxsociety.Services
         public async Task<VisitorLogs> GetVisitorLogByIdAsync(long id)
         {
             return await _context.VisitorLogs.Include(vl => vl.Visitor)
-            .FirstOrDefaultAsync(vl => vl.VisitorLogId == id);
+            .FirstOrDefaultAsync(vl => vl.Id == id);
         }
 
         public async Task<IEnumerable<VisitorLogs>> GetVisitorLogsByVisitorIdAsync(long visitorId)

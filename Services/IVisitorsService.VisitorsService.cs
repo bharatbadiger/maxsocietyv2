@@ -32,7 +32,7 @@ public class VisitorsService : IVisitorsService
 
     public async Task UpdateVisitorAsync(long id, Visitors visitor)
     {
-        if (id != visitor.VisitorId)
+        if (id != visitor.Id)
         {
             throw new ArgumentException("Id mismatch");
         }

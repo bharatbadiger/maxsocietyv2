@@ -57,7 +57,7 @@ public class VisitorsController : ControllerBase
         try
         {
             var addedVisitor = await _visitorsService.AddVisitorAsync(visitor);
-            return CreatedAtAction(nameof(GetVisitor), new { id = addedVisitor.VisitorId }, new ApiResponse<Visitors>(true, "Visitor created successfully", addedVisitor));
+            return CreatedAtAction(nameof(GetVisitor), new { id = addedVisitor.Id }, new ApiResponse<Visitors>(true, "Visitor created successfully", addedVisitor));
         }
         catch (Exception ex)
         {
@@ -69,7 +69,7 @@ public class VisitorsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<Visitors>>> PutVisitor(long id, Visitors visitor)
     {
-        if (id != visitor.VisitorId)
+        if (id != visitor.Id)
         {
             return BadRequest(new ApiResponse<Visitors>(false, "Id mismatch", null));
         }

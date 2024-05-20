@@ -8,7 +8,7 @@ namespace Maxsociety.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long VisitorId { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MaxLength(60)]
