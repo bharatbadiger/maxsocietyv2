@@ -1,4 +1,5 @@
 using Maxsociety;
+using Maxsociety.DTO;
 using Maxsociety.Models;
 using Maxsociety.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -38,16 +39,16 @@ public class VisitorsController : ControllerBase
 
     // GET: maxsociety/Visitors/phone/{mobileNo}
     [HttpGet("mobileNo/{mobileNo}")]
-    public async Task<ActionResult<ApiResponse<Visitors>>> GetVisitorByMobileNo(string mobileNo)
+    public async Task<ActionResult<ApiResponse<VisitorDto>>> GetVisitorByMobileNo(string mobileNo)
     {
-        var visitor = await _visitorsService.GetVisitorByMobileNoAsync(mobileNo);
+        var visitor = await _visitorsService.GetVisitorByMobileNoWithLastVisitAsync(mobileNo);
 
         if (visitor == null)
         {
             return NotFound(new ApiResponse<Visitors>(false, "Visitor not found", null));
         }
 
-        return Ok(new ApiResponse<Visitors>(true, "Visitor retrieved successfully", visitor));
+        return Ok(new ApiResponse<VisitorDto>(true, "Visitor retrieved successfully", visitor));
     }
 
     // POST: maxsociety/Visitors

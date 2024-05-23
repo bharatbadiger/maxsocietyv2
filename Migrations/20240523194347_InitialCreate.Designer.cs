@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace maxsociety.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240520204803_InitialCreate")]
+    [Migration("20240523194347_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -83,9 +83,6 @@ namespace maxsociety.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FlatNo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");

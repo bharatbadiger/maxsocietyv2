@@ -1,3 +1,4 @@
+using Maxsociety.DTO;
 using Maxsociety.Models;
 
 namespace Maxsociety.Services
@@ -10,6 +11,7 @@ namespace Maxsociety.Services
         Task UpdateVisitorAsync(long id, Visitors visitor);
         Task DeleteVisitorAsync(long id);
         Task<Visitors> GetVisitorByMobileNoAsync(string mobileNo);
+        Task<VisitorDto> GetVisitorByMobileNoWithLastVisitAsync(string mobileNo);
     }
 }
 
