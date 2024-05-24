@@ -18,13 +18,6 @@ namespace Maxsociety.Models
         [MaxLength(14)]
         public string? MobileNo { get; set; }
 
-        public Gender Gender { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        [EmailAddress]
-        public string? Email { get; set; }
-
         public string? ImagePath { get; set; }
 
     }

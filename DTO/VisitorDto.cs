@@ -7,8 +7,6 @@ namespace Maxsociety.DTO
         public long Id { get; set; }
         public string? VisitorName { get; set; }
         public string? MobileNo { get; set; }
-        public Gender Gender { get; set; }
-        public string? Email { get; set; }
         public string? ImagePath { get; set; }
         public VisitorLogDto? LastVisitorLog { get; set; }
         public DateTime CreatedOn { get; set; }
